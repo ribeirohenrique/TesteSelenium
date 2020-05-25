@@ -1,3 +1,4 @@
+package Testes;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.junit.Test;

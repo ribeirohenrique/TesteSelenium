@@ -1,3 +1,4 @@
+package Testes;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -5,12 +6,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 
-public class LoginErrado4Test {
+public class TesteLogin2 {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
@@ -25,14 +27,14 @@ public class LoginErrado4Test {
     driver.quit();
   }
   @Test
-  public void loginErrado4() throws InterruptedException {  
+  public void loginErrado2() throws InterruptedException {
     // Step # | name
 	  
     // 1 | open
     driver.get("https://outlook.live.com/owa/");
     Thread.sleep(500);
     
-    // 2 | setWindowSize
+    // 2 | setWindowSize 
     driver.manage().window().setSize(new Dimension(1366, 720));
     Thread.sleep(250);
     
@@ -44,7 +46,7 @@ public class LoginErrado4Test {
     driver.findElement(By.id("i0116")).sendKeys("testandotestestestados@outlook.com");
     Thread.sleep(1000);
     
-    // 5 | click 
+    // 5 | click
     driver.findElement(By.id("idSIButton9")).click();
     Thread.sleep(1000);
     
@@ -53,59 +55,46 @@ public class LoginErrado4Test {
     Thread.sleep(500);
     
     // 7 | type
-    driver.findElement(By.id("i0118")).sendKeys("123456Testes");
+    driver.findElement(By.id("i0118")).sendKeys("123");
     Thread.sleep(500);
     
     // 8 | click
     driver.findElement(By.id("idSIButton9")).click();
     Thread.sleep(500);
     
-    // 9 | waitForElementPresent
+    // 9 | assertElementPresent
+    {
+      List<WebElement> elements = driver.findElements(By.id("passwordError"));
+      assert(elements.size() > 0);
+    }
+    
+    // 10 | click
+    driver.findElement(By.id("i0118")).click();
+    Thread.sleep(500);
+    
+    // 11 | type
+    driver.findElement(By.id("i0118")).sendKeys("123456Testes");
+    Thread.sleep(500);
+    
+    // 12 | click
+    driver.findElement(By.id("idSIButton9")).click();
+    Thread.sleep(1000);
+    
+    // 13 | waitForElementPresent
     {
       WebDriverWait wait = new WebDriverWait(driver, 5000);
       wait.until(ExpectedConditions.presenceOfElementLocated(By.id("O365_MainLink_NavMenu")));
     }
-    // 10 | click
-    driver.findElement(By.cssSelector(".\\_33rLSYbzxvhXjgYTwfjWQI > .ms-Button-flexContainer")).click();
-    Thread.sleep(1000);
     
-    // 11 | click
-    driver.findElement(By.cssSelector(".ms-BasePicker-input")).click();
-    Thread.sleep(500);
-    
-    // 12 | type
-    driver.findElement(By.cssSelector(".ms-BasePicker-input")).sendKeys("testandotestestestados@outlook.com");
-    Thread.sleep(2500);
-    
-    // 13 | click
-    driver.findElement(By.xpath("//div[2]/div/div/div/input")).click();
-    Thread.sleep(1000);
-    
-    // 14 | type
-    driver.findElement(By.xpath("//div[2]/div/div/div/input")).sendKeys("Ela partiu, e nunca mais voltou :(");
-    Thread.sleep(1000);
-    
-    // 15 | click
-    driver.findElement(By.cssSelector(".ms-Button--primary")).click();
-    Thread.sleep(500);
-    
-    // 16 | waitForElementPresent
-    {
-      WebDriverWait wait = new WebDriverWait(driver, 5000);
-      wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".\\_6tY-cxX-513mYdh6yJLFJ")));
-    }
-    // 17 | click
+    // 14 | click
     driver.findElement(By.className("_14ggU2yZvNol5U91gfmYQA")).click();
     Thread.sleep(1000);
     
-    // 18 | click
+    // 15 | click
     driver.findElement(By.id("meControlSignoutLink")).click();
     Thread.sleep(1000);
     
-    // 19 | webdriverChooseOkOnVisibleConfirmation
-    driver.switchTo().alert().accept();
-    
-    // 20 | waitForElementPresent
+    // 16 | waitForElementPresent
     {
       WebDriverWait wait = new WebDriverWait(driver, 5000);
       wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sb_form_go")));

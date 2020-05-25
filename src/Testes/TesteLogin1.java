@@ -1,3 +1,4 @@
+package Testes;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -5,12 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 
-public class LoginErrado3Test {
+
+public class TesteLogin1 {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
@@ -25,10 +26,10 @@ public class LoginErrado3Test {
     driver.quit();
   }
   @Test
-  public void loginErrado3() throws InterruptedException {
-    // Step # | name
+  public void loginErrado1() throws InterruptedException {
+    // Step # | name | target | value
 	  
-    // 1 | open
+    // 1 | open | https://outlook.live.com/owa/ | 
     driver.get("https://outlook.live.com/owa/");
     Thread.sleep(500);
     
@@ -36,7 +37,7 @@ public class LoginErrado3Test {
     driver.manage().window().setSize(new Dimension(1366, 720));
     Thread.sleep(250);
     
-    // 3 | click 
+    // 3 | click
     driver.findElement(By.linkText("Entrar")).click();
     Thread.sleep(1000);
     
@@ -53,31 +54,17 @@ public class LoginErrado3Test {
     Thread.sleep(500);
     
     // 7 | type
-    driver.findElement(By.id("i0118")).sendKeys("123456Testes");
+    driver.findElement(By.id("i0118")).sendKeys("123");
     Thread.sleep(500);
     
     // 8 | click
     driver.findElement(By.id("idSIButton9")).click();
     Thread.sleep(500);
     
-    // 9 | waitForElementPresent
+    // 9 | assertElementPresent 
     {
-      WebDriverWait wait = new WebDriverWait(driver, 5000);
-      wait.until(ExpectedConditions.presenceOfElementLocated(By.id("O365_MainLink_NavMenu")));
-    }
-    
-    // 10 | click
-    driver.findElement(By.className("_14ggU2yZvNol5U91gfmYQA")).click();
-    Thread.sleep(1000);
-    
-    // 11 | click
-    driver.findElement(By.id("meControlSignoutLink")).click();
-    Thread.sleep(1000);
-    
-    // 12 | waitForElementPresent
-    {
-      WebDriverWait wait = new WebDriverWait(driver, 5000);
-      wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sb_form_go")));
+      List<WebElement> elements = driver.findElements(By.id("passwordError"));
+      assert(elements.size() > 0);
     }
   }
 }
